@@ -1,0 +1,18 @@
+#!/usr/bin/python
+import sys
+
+from requests_html import HTMLSession
+
+args = sys.argv
+URL = args[1]
+print(URL)
+
+session = HTMLSession()
+r = session.get(URL)
+r.html.render(timeout=20)
+
+for t in r.html.find('body'):
+        print(t.text)
+
+r.close()
+session.close()
